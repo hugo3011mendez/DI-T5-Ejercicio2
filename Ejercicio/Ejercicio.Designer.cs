@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ejercicio));
             this.etiquetaAviso1 = new Etiqueta_Aviso.EtiquetaAviso();
             this.SuspendLayout();
             // 
@@ -37,11 +38,11 @@
             this.etiquetaAviso1.Color2Gradiente = System.Drawing.Color.Empty;
             this.etiquetaAviso1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.etiquetaAviso1.Gradiente = false;
-            this.etiquetaAviso1.ImagenMarca = null;
-            this.etiquetaAviso1.Location = new System.Drawing.Point(106, 87);
-            this.etiquetaAviso1.Marca = Etiqueta_Aviso.eMarca.Nada;
+            this.etiquetaAviso1.ImagenMarca = ((System.Drawing.Image)(resources.GetObject("etiquetaAviso1.ImagenMarca")));
+            this.etiquetaAviso1.Location = new System.Drawing.Point(54, 56);
+            this.etiquetaAviso1.Marca = Etiqueta_Aviso.eMarca.ImagenDeForma;
             this.etiquetaAviso1.Name = "etiquetaAviso1";
-            this.etiquetaAviso1.Size = new System.Drawing.Size(140, 23);
+            this.etiquetaAviso1.Size = new System.Drawing.Size(172, 83);
             this.etiquetaAviso1.TabIndex = 0;
             this.etiquetaAviso1.Text = "etiquetaAviso1";
             // 

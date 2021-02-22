@@ -41,10 +41,11 @@ namespace Etiqueta_Aviso
             get { return marca; }
         }
 
-        [Category("Marca")]
-        [Description("Guarda la imagen que se muestra como marca cuando se escoge esta opción")]
         // Creo una variable para indicar la imagen que se dibujará si se escoge ImagenDeForma para la etiqueta aviso
         private Image imagenMarca;
+
+        [Category("Marca")]
+        [Description("Guarda la imagen que se muestra como marca cuando se escoge esta opción")]
         public Image ImagenMarca
         {
             set
@@ -99,11 +100,11 @@ namespace Etiqueta_Aviso
 
 
                 case eMarca.ImagenDeForma: // Dibujo la imagen establecida en la variable imagenMarca
-                    g.DrawImage(ImagenMarca, new Point(0, 0));
+                    g.DrawImage(ImagenMarca, 0, 0, 40, 40);
 
                     // Y establezco los offsets para escribir el texto que se quiera
-                    offsetX = this.Font.Height + 10;
-                    offsetY = 30;
+                    offsetX = this.Font.Height + 20;
+                    offsetY = 10;
                     break;
             }
 
@@ -123,10 +124,10 @@ namespace Etiqueta_Aviso
             ge.DrawLine(Pens.Red, 0, 0, 100, 0);
             ge.ResetTransform();
 
-            // Rotación de 30o en sentido horario
-            ge.RotateTransform(30);
-            ge.DrawLine(Pens.Blue, 0, 0, 100, 0);
-            ge.ResetTransform();
+            //// Rotación de 30o en sentido horario
+            //ge.RotateTransform(30);
+            //ge.DrawLine(Pens.Blue, 0, 0, 100, 0);
+            //ge.ResetTransform();
 
             // Traslación + rotación
             ge.TranslateTransform(100, 100);
