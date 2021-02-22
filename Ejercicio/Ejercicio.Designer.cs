@@ -42,9 +42,10 @@
             this.etiquetaAviso1.Location = new System.Drawing.Point(54, 56);
             this.etiquetaAviso1.Marca = Etiqueta_Aviso.eMarca.ImagenDeForma;
             this.etiquetaAviso1.Name = "etiquetaAviso1";
-            this.etiquetaAviso1.Size = new System.Drawing.Size(172, 83);
+            this.etiquetaAviso1.Size = new System.Drawing.Size(182, 43);
             this.etiquetaAviso1.TabIndex = 0;
             this.etiquetaAviso1.Text = "etiquetaAviso1";
+            this.etiquetaAviso1.ClickEnMarca += new System.EventHandler(this.etiquetaAviso1_ClickEnMarca);
             // 
             // Ejercicio
             // 

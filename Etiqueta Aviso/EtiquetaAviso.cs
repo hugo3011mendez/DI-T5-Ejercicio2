@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Etiqueta_Aviso
 {
+
     public enum eMarca // Defino el enumerado para los adornos
     {
         Nada,
@@ -21,6 +22,12 @@ namespace Etiqueta_Aviso
 
     public partial class EtiquetaAviso : Control // Hago un componente personalizado, dibujando en vez de metiendo componentes de Windows Forms
     {
+        int xMarca, yMarca; // Para conseguir las coordenadas máximas de la marca en cuestión
+
+        int grosor = 0; //Grosor de las líneas de dibujo
+        int offsetX = 0; //Desplazamiento a la derecha del texto
+        int offsetY = 0; //Desplazamiento hacia abajo del texto
+
         public EtiquetaAviso()
         {
             InitializeComponent();
@@ -64,9 +71,6 @@ namespace Etiqueta_Aviso
         {
             base.OnPaint(pe);
             Graphics g = pe.Graphics;
-            int grosor = 0; //Grosor de las líneas de dibujo
-            int offsetX = 0; //Desplazamiento a la derecha del texto
-            int offsetY = 0; //Desplazamiento hacia abajo del texto
 
             //Esta propiedad provoca mejoras en la apariencia o en la eficiencia a la hora de dibujar
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -77,6 +81,11 @@ namespace Etiqueta_Aviso
             {
                 case eMarca.Circulo:
                     grosor = 20;
+
+                    // Actualizo el valor de las coordenadas máximas de la marca
+                    xMarca = grosor;
+                    yMarca = grosor;
+
                     g.DrawEllipse(new Pen(Color.Green, grosor), grosor, grosor, this.Font.Height, this.Font.Height);
 
                     offsetX = this.Font.Height + grosor;
@@ -87,6 +96,10 @@ namespace Etiqueta_Aviso
                 case eMarca.Cruz:
                     grosor = 5;
                     Pen lapiz = new Pen(Color.Red, grosor);
+
+                    // Actualizo el valor de las coordenadas máximas de la marca
+                    xMarca = this.Font.Height;
+                    yMarca = this.Font.Height;
 
                     g.DrawLine(lapiz, grosor, grosor, this.Font.Height, this.Font.Height);
                     g.DrawLine(lapiz, this.Font.Height, grosor, grosor, this.Font.Height);
@@ -100,6 +113,11 @@ namespace Etiqueta_Aviso
 
 
                 case eMarca.ImagenDeForma: // Dibujo la imagen establecida en la variable imagenMarca
+
+                    // Actualizo el valor de las coordenadas máximas de la marca
+                    xMarca = 40;
+                    yMarca = 40;
+
                     g.DrawImage(ImagenMarca, 0, 0, 40, 40);
 
                     // Y establezco los offsets para escribir el texto que se quiera
@@ -197,5 +215,18 @@ namespace Etiqueta_Aviso
         [Category("Eventos")]
         [Description("Se lanza cuando se hace click sobre la marca, si existe")]
         public event EventHandler ClickEnMarca;
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+
+            if (Marca != eMarca.Nada)
+            {
+                if (e.X <= xMarca && e.Y <= yMarca)
+                {
+                    ClickEnMarca?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
     }
 }

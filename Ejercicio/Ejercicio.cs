@@ -16,5 +16,10 @@ namespace Ejercicio
         {
             InitializeComponent();
         }
+
+        private void etiquetaAviso1_ClickEnMarca(object sender, EventArgs e)
+        {
+            MessageBox.Show("Clickado");
+        }
     }
 }
