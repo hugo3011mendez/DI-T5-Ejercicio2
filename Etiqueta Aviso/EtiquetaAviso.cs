@@ -24,9 +24,9 @@ namespace Etiqueta_Aviso
     {
         int xMarca, yMarca; // Para conseguir las coordenadas máximas de la marca en cuestión
 
-        int grosor = 0; //Grosor de las líneas de dibujo
-        int offsetX = 0; //Desplazamiento a la derecha del texto
-        int offsetY = 0; //Desplazamiento hacia abajo del texto
+        int grosor; //Grosor de las líneas de dibujo
+        int offsetX; //Desplazamiento a la derecha del texto
+        int offsetY; //Desplazamiento hacia abajo del texto
 
         public EtiquetaAviso()
         {
@@ -111,18 +111,34 @@ namespace Etiqueta_Aviso
                     lapiz.Dispose();
                     break;
 
-
                 case eMarca.ImagenDeForma: // Dibujo la imagen establecida en la variable imagenMarca
 
-                    // Actualizo el valor de las coordenadas máximas de la marca
-                    xMarca = 40;
-                    yMarca = 40;
+                    try
+                    {
+                        // Actualizo el valor de las coordenadas máximas de la marca
+                        xMarca = 40;
+                        yMarca = 40;
 
-                    g.DrawImage(ImagenMarca, 0, 0, 40, 40);
+                        g.DrawImage(ImagenMarca, 0, 0, 40, 40);
 
-                    // Y establezco los offsets para escribir el texto que se quiera
-                    offsetX = this.Font.Height + 20;
-                    offsetY = 10;
+                        // Y establezco los offsets para escribir el texto que se quiera
+                        offsetX = this.Font.Height + 20;
+                        offsetY = 10;
+                    }
+                    catch (ArgumentException)
+                    {
+                        Marca = eMarca.Nada;
+                    }
+
+                    break;
+
+
+                case eMarca.Nada:
+                    // Pongo los valores a 0 cuando es Nada
+                    offsetX = 0;
+                    offsetY = 0;
+                    grosor = 0;
+
                     break;
             }
 
