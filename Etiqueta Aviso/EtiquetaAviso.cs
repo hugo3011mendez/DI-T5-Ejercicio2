@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +76,23 @@ namespace Etiqueta_Aviso
             //Esta propiedad provoca mejoras en la apariencia o en la eficiencia a la hora de dibujar
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
+
+            Graphics ge = pe.Graphics; //Creo otro objeto graphics para enseñar las transformaciones
+
+            if (Gradiente && Color1Gradiente != null && Color2Gradiente != null)
+            {
+                LinearGradientBrush gradientColor = new LinearGradientBrush(
+                    new PointF(0, 0),
+                    new PointF(this.Width, this.Height),
+                    Color1Gradiente,
+                    Color2Gradiente);
+
+                g.FillRectangle(gradientColor, new RectangleF(
+                    0, 0,
+                    this.Width, this.Height));
+            }
+
+
             //Dependiendo del valor de la propiedad marca dibujamos una
             //Cruz o un Círculo
             switch (Marca)
@@ -142,6 +160,7 @@ namespace Etiqueta_Aviso
                     break;
             }
 
+
             // Finalmente pintamos el Texto desplazado si fuera necesario
             SolidBrush b = new SolidBrush(this.ForeColor);
             g.DrawString(this.Text, this.Font, b, offsetX + grosor, offsetY);
@@ -150,24 +169,6 @@ namespace Etiqueta_Aviso
             this.Size = new Size(tam.Width + offsetX + grosor, tam.Height + offsetY * 2);
 
             b.Dispose();
-
-            Graphics ge = pe.Graphics; //Creo otro objeto graphics para enseñar las transformaciones
-
-            // Traslación
-            ge.TranslateTransform(100, 100);
-            ge.DrawLine(Pens.Red, 0, 0, 100, 0);
-            ge.ResetTransform();
-
-            //// Rotación de 30o en sentido horario
-            //ge.RotateTransform(30);
-            //ge.DrawLine(Pens.Blue, 0, 0, 100, 0);
-            //ge.ResetTransform();
-
-            // Traslación + rotación
-            ge.TranslateTransform(100, 100);
-            ge.RotateTransform(30);
-            ge.DrawLine(Pens.Green, 0, 0, 100, 0);
-            ge.ResetTransform();
         }
 
 
@@ -177,14 +178,15 @@ namespace Etiqueta_Aviso
             this.Refresh(); // Y lanzo Refresh() para que se dibuje con todo
         }
 
+        private bool gradiente = false;
         [Category("Fondo")]
         [Description("Indica si se dibuja el gradiente de fondo o no")]
-        private bool gradiente = false;
         public bool Gradiente
         {
             set
             {
                 gradiente = value;
+                this.Refresh();
             }
 
             get
@@ -194,14 +196,15 @@ namespace Etiqueta_Aviso
         }
 
 
+        private Color color1Gradiente;
         [Category("Fondo")]
         [Description("Es el primer color que influye en el gradiente al formarse")]
-        private Color color1Gradiente;
         public Color Color1Gradiente
         {
             set
             {
                 color1Gradiente = value;
+                this.Refresh();
             }
 
             get
@@ -211,14 +214,15 @@ namespace Etiqueta_Aviso
         }
 
 
+        private Color color2Gradiente;
         [Category("Fondo")]
         [Description("Es el segundo color que influye en el gradiente al formarse")]
-        private Color color2Gradiente;
         public Color Color2Gradiente
         {
             set
             {
                 color2Gradiente = value;
+                this.Refresh();
             }
 
             get

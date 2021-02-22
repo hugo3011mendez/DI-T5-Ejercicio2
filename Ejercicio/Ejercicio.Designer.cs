@@ -33,10 +33,10 @@
             // 
             // etiquetaAviso1
             // 
-            this.etiquetaAviso1.Color1Gradiente = System.Drawing.Color.Empty;
-            this.etiquetaAviso1.Color2Gradiente = System.Drawing.Color.Empty;
+            this.etiquetaAviso1.Color1Gradiente = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.etiquetaAviso1.Color2Gradiente = System.Drawing.Color.Yellow;
             this.etiquetaAviso1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.etiquetaAviso1.Gradiente = false;
+            this.etiquetaAviso1.Gradiente = true;
             this.etiquetaAviso1.ImagenMarca = null;
             this.etiquetaAviso1.Location = new System.Drawing.Point(102, 74);
             this.etiquetaAviso1.Marca = Etiqueta_Aviso.eMarca.Nada;
