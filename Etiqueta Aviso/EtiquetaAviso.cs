@@ -127,21 +127,29 @@ namespace Etiqueta_Aviso
                     lapiz.Dispose();
                     break;
 
+
                 case eMarca.ImagenDeForma: // Dibujo la imagen establecida en la variable imagenMarca
 
-                    try
+                    if (ImagenMarca != null)
                     {
-                        // Actualizo el valor de las coordenadas máximas de la marca
-                        xMarca = 40;
-                        yMarca = 40;
+                        try
+                        {
+                            // Actualizo el valor de las coordenadas máximas de la marca
+                            xMarca = 40;
+                            yMarca = 40;
 
-                        g.DrawImage(ImagenMarca, 0, 0, 40, 40);
+                            g.DrawImage(ImagenMarca, 0, 0, 40, 40);
 
-                        // Y establezco los offsets para escribir el texto que se quiera
-                        offsetX = this.Font.Height + 20;
-                        offsetY = 10;
+                            // Y establezco los offsets para escribir el texto que se quiera
+                            offsetX = this.Font.Height + 20;
+                            offsetY = 10;
+                        }
+                        catch (ArgumentException)
+                        {
+                            Marca = eMarca.Nada;
+                        }
                     }
-                    catch (ArgumentException)
+                    else
                     {
                         Marca = eMarca.Nada;
                     }
