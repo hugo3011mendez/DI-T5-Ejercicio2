@@ -77,8 +77,6 @@ namespace Etiqueta_Aviso
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
 
-            Graphics ge = pe.Graphics; //Creo otro objeto graphics para enseñar las transformaciones
-
             if (Gradiente && Color1Gradiente != null && Color2Gradiente != null)
             {
                 LinearGradientBrush gradientColor = new LinearGradientBrush(
